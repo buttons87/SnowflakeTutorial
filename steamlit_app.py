@@ -12,14 +12,12 @@ streamlit.text('🍳 Hard-Boiled Free-Range Egg')
 streamlit.text('🥑 Avo & Toast')
 streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
 
-
 my_fruit_list = my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
 my_fruit_list = my_fruit_list.set_index('Fruit')
 fruits_selected = streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index),['Avocado','Strawberries'])
 fruits_to_show = my_fruit_list.loc[fruits_selected]
 
 streamlit.dataframe(fruits_to_show)
-
 
 def get_fruityvice_data(this_fruit_choice):
     fruityvice_response = requests.get("https://fruityvice.com/api/fruit/"+ this_fruit_choice)
@@ -35,7 +33,7 @@ try:
         back_from_function = get_fruityvice_data(fruit_choice)
         streamlit.dataframe(back_from_function)
         
-except URLError as e:
+#except URLError as e:
     streamlit.error()
     
 streamlit.stop()    
